@@ -20,3 +20,9 @@
   .navbar{
     background-color: #24c6d1;
   }
+  
+  @media(max-width: 767px) {
+    .container {
+        width: auto;
+    }
+}
