@@ -9,25 +9,26 @@ import 'rxjs/Rx';
 export  class  APIService {
   constructor(private  http:  Http) {}
   getComplaint(){
-      return  this.http.get('http://localhost:3000/track');
+      // return  this.http.get('http://localhost:3000/track');
+      return  this.http.get('https://abcdcomplaints.herokuapp.com/track');
   }
 
   sendComplaint(xx): any{
-    return  this.http.post('http://localhost:3000/submit',xx)
+    return  this.http.post('https://abcdcomplaints.herokuapp.com/submit',xx)
     .map(
       (response:Response) => response.json()
       );
 
   } 
   getComplaintbyID(id){
-    return  this.http.get('http://localhost:3000/track/'+id)
+    return  this.http.get('https://abcdcomplaints.herokuapp.com/track/'+id)
     .map(
       (resp:Response) => resp.json()
       );
 }
 
    updComplaint(yy): any{
-     return this.http.put('http://localhost:3000/update',yy)
+     return this.http.put('https://abcdcomplaints.herokuapp.com/update',yy)
      .map(
       (response:Response) => response.json()
       );
@@ -35,7 +36,7 @@ export  class  APIService {
    }
 
    delComplaint(id): any{
-    return this.http.delete('http://localhost:3000/delete/'+id)
+    return this.http.delete('https://abcdcomplaints.herokuapp.com/delete/'+id)
     .map(
      (response:Response) => response.json()
      );
@@ -43,7 +44,7 @@ export  class  APIService {
   }
  
   getAllComplaints(): any{
-    return this.http.get('http://localhost:3000/complaints')
+    return this.http.get('https://abcdcomplaints.herokuapp.com/complaints')
     .map(
      (response:Response) => response.json()
      );
