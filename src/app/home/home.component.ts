@@ -10,7 +10,7 @@ import {AccordionModule} from 'primeng/accordion';
                  
 })
 export class HomeComponent implements OnInit {
-  private  complaints:  Array<object> = [];
+  complaints:  Array<object> = [];
   
   constructor(private  apiService:  APIService) { }
    
