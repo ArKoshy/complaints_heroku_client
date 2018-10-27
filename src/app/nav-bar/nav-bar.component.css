@@ -1,0 +1,22 @@
+/* .nav-link a:hover, a:focus{
+    color:aliceblue;
+    text-decoration: none;
+    outline: none;
+   
+  } */
+  
+  .nav-link{
+    color: #dcdde1;
+    text-decoration:#dcdde1;
+    text-decoration-color:#dcdde1;
+  }
+
+  .nav-link a:hover, a:focus{
+    color: white;
+    text-decoration:white;
+    text-decoration-color:white;
+  }
+
+  .navbar{
+    background-color: #24c6d1;
+  }

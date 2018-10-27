@@ -1,0 +1,29 @@
+
+
+/* style for the form  */
+.wrapper{
+
+  width: 500px;
+  overflow: hidden;     
+  margin: auto;
+  background-color: #abafae;
+  padding: 20px;
+  margin-top: 100px;
+  border: 2px solid silver;
+  }
+
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
+  
+  .ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+  }
+
+  .btn-class{
+    margin-right: 10px
+  }
+
+  .btn-class-save{
+    margin-left: 200px
+  }
