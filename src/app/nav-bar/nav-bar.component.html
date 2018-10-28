@@ -11,13 +11,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <li routerLinkActive="active">
-          <a class="nav-link" routerLink="home"><i class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink="home" (click)="refresh()"><i class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a>
         </li>
         <li routerLinkActive="active" >
-          <a class="nav-link" routerLink="submit"><i class="fas fa-crosshairs"></i>Submit Complaint <span class="sr-only"></span></a>
+          <a class="nav-link" routerLink="submit" (click)="refresh()"><i class="fas fa-crosshairs"></i>Submit Complaint <span class="sr-only"></span></a>
         </li>
         <li routerLinkActive="active" >
-          <a class="nav-link" routerLink="track"><i class="fas fa-thumbtack"></i>Track Complaint <span class="sr-only"></span></a>
+          <a class="nav-link" routerLink="track" (click)="refresh()"><i class="fas fa-thumbtack"></i>Track Complaint <span class="sr-only"></span></a>
         </li>
       </ul>
     </div>
