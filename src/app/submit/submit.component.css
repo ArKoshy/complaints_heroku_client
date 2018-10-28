@@ -5,16 +5,10 @@
     width: 500px;
     overflow: hidden;     
     margin: auto;
-    /* background-color: #abafae; */
     padding: 20px;
     margin-top: 50px;
-    /* border: 2px solid silver; */
+    
     }
-
-/* .form-control.ng-touched.ng-invalid{
-    border: 2px solid red;
-
-} */
 
 .ng-valid[required], .ng-valid.required  {
     border-left: 5px solid #42A948; /* green */
@@ -26,4 +20,15 @@
 
   .class{
       background-color: #a6c8ca;
+  }
+
+  @media only screen and (max-device-width: 550px){
+
+    .form-textbox, .form-textarea{
+    
+         width:200px !important;
+         min-width:200px !important;
+         max-width:200px !important;
+    
+    }
   }

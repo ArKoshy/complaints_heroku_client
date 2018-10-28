@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,55 +10,37 @@
 
 <body>
 
-                      <!-- Update Successful Division -->
-     <div class="jumbotron"
-      [hidden]="!hideStat">
-        <p class="lead" style="text-align:center"> Record Updated Successfuly</p>
-      </div>
-                      <!-- Update Successful Div ends -->
-                       <!-- Tracker ID Division -->
-    
-    
-    <div class="jumbotron"
-          [hidden] ="hideStat">
+  <!-- Update Successful Division -->
+  <div class="jumbotron" [hidden]="!hideStat">
+    <p class="lead" style="text-align:center"> Record Updated Successfuly</p>
+  </div>
+  <!-- Update Successful Div ends -->
+  <!-- Tracker ID Division -->
+
+
+  <div class="jumbotron" [hidden]="hideStat">
+    <div>
+      <form #trackForm="ngForm" (ngSubmit)="onTrack(trackID)">
+        <div class="form-group">
+          <input type="text" required name="trackID" [disabled]="trackStat" class="form-control" [(ngModel)]="trackID"
+            #trackIDControl="ngModel" placeholder="Enter Tracking ID" />
+        </div>
         <div>
-          <form
-           #trackForm ="ngForm" 
-            (ngSubmit) = "onTrack(trackID)">
-            <div class="form-group">
-              <input 
-               type="text" 
-               required
-               name="trackID"
-               [disabled]  ="trackStat"
-               class="form-control"
-               [(ngModel)] = "trackID"
-               #trackIDControl = "ngModel" 
-               placeholder="Enter Tracking ID"/>
-            </div>
-            <div>
-                <button type="submit"
-                class="btn btn-primary"
-                [disabled]="!trackForm.form.valid || trackStat">Track</button>
-             </div>
-          </form>
+          <button type="submit" class="btn btn-primary" [disabled]="!trackForm.form.valid || trackStat">Track</button>
         </div>
-        <div *ngIf = "trackStat && noDataStat">
-          <p>Complaint with this tracking ID not found.</p>
-        </div>
-       
+      </form>
+    </div>
+    <div *ngIf="trackStat && noDataStat">
+      <p>Complaint with this tracking ID not found.</p>
     </div>
 
-                  <!-- end of Tracker ID Division -->
+  </div>
 
-                  <!-- Modal for delete confirmation -->
-   
-<div class="modal fade" 
-     id="deleteModal" 
-     tabindex="-1" 
-     role="dialog" 
-     aria-labelledby="deleteModalLabel" 
-     aria-hidden="true">
+  <!-- end of Tracker ID Division -->
+
+  <!-- Modal for delete confirmation -->
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -67,157 +50,103 @@
           </button>
         </div>
         <div class="modal-body">
-            <p>Are you sure you want to delete?</p>
+          <p>Are you sure you want to delete?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary"(click) ="delComp()" data-dismiss="modal">Save changes</button>
+          <button type="button" class="btn btn-primary" (click)="delComp()" data-dismiss="modal">Save changes</button>
         </div>
       </div>
     </div>
   </div>
 
-                    <!-- End of Modal -->
+  <!-- End of Modal -->
 
-                    <!-- Retrieved Form Section -->
-  <div  *ngIf = "!noDataStat" class="wrapper" [hidden] = "!trackStat||hideStat">
-  <form 
-        #trackCompForm ="ngForm"
-        (ngSubmit) = "onSave(complaint)">
+  <!-- Retrieved Form Section -->
+  <div *ngIf="!noDataStat" class="wrapper" [hidden]="!trackStat||hideStat">
+    <form #trackCompForm="ngForm" (ngSubmit)="onSave(complaint)">
 
-    <div class="form-group">
+      <div class="form-group">
         <span class="btn-class">
-        <button
-        class="btn btn-success"
-        type = "button"
-        [disabled]="!nonEditStat"
-        (click) = "editComp()">Edit
-         </button> 
+          <button class="btn btn-success" type="button" [disabled]="!nonEditStat" (click)="editComp()">Edit
+          </button>
         </span>
-         <span class="btn-class">
-         <button
-           class="btn btn-success" 
-           type = "button"
-           [disabled]="!nonEditStat"
-           
-           data-toggle="modal"
-           data-target="#deleteModal"
-           >Delete
-        </button> 
-      </span>
-      <span class="btn-class-save">
-          <button
-          class="btn btn-success"
-          type = "submit"
-          [hidden]="nonEditStat"
-          
-          (click) = "editComp()">Save
-          </button> 
-      </span>
-    </div>
-    <div class="form-group">
-        
-        <label for="userName">Full Name</label>
-        <input required 
-               [disabled] = "!nonEditStat"
-               name="userName" 
-               [(ngModel)] ="complaint.userName"
-               type="text" 
-               class="form-control"
-               pattern="[a-zA-Z ]*"
-               #userNameControl = "ngModel" 
-               (change)="log(userNameControl)"   
-               minlength = "3" 
-               maxlength="25" 
-               placeholder="Full Name"  >
-        <div 
-              class="alert alert-danger" 
-              *ngIf="userNameControl.touched  && !userNameControl.valid">
-              <div *ngIf="userNameControl.errors.required">
-                Name is required
-              </div>
-              <div *ngIf="userNameControl.errors.minlength">
-                 Name should have a min of 3 characters
-              </div>
-              <div *ngIf="userNameControl.errors.pattern">
-                  Name should have characters only
-               </div>
-        </div> 
-    </div>
-    <div class="form-group">
-        <label for="mobile">Mobile</label>
-        <input name="mobile" 
-               [disabled] ="nonEditStat"
-               [(ngModel)] ="complaint.mobile"
-               type="text" 
-               class="form-control"
-               placeholder="Mobile Number"  >
-    </div>    
-    <div class="form-group">
-        <label for="email">Email </label>
-        <input type="email" 
-               [disabled] = "nonEditStat"
-               class="form-control" 
-               #emailControl ="ngModel"
-               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-               [(ngModel)] ="complaint.email"
-               name="email" 
-               aria-describedby="emailHelp" 
-               placeholder="Enter email"  
-               >
-        <small id="emailHelp" class="form-text text-muted">email will be not be shared publicly</small>
-        <div   class="alert alert-danger" 
-          *ngIf="emailControl.touched  && !emailControl.valid">
-        
-           <div *ngIf="emailControl.errors.pattern"> 
-            Email is invalid
-           </div> 
-          
-         </div> 
-   
+        <span class="btn-class">
+          <button class="btn btn-success" type="button" [disabled]="!nonEditStat" data-toggle="modal" data-target="#deleteModal">Delete
+          </button>
+        </span>
+        <span class="btn-class-save">
+          <button class="btn btn-success" type="submit" [hidden]="nonEditStat" (click)="editComp()">Save
+          </button>
+        </span>
       </div>
-    <div class="form-group">
+      <div class="form-group">
+
+        <label for="userName">Full Name</label>
+        <input required [disabled]="!nonEditStat" name="userName" [(ngModel)]="complaint.userName" type="text" class="form-control"
+          pattern="[a-zA-Z ]*" #userNameControl="ngModel" (change)="log(userNameControl)" minlength="3" maxlength="25"
+          placeholder="Full Name">
+        <div class="alert alert-danger" *ngIf="userNameControl.touched  && !userNameControl.valid">
+          <div *ngIf="userNameControl.errors.required">
+            Name is required
+          </div>
+          <div *ngIf="userNameControl.errors.minlength">
+            Name should have a min of 3 characters
+          </div>
+          <div *ngIf="userNameControl.errors.pattern">
+            Name should have characters only
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="mobile">Mobile</label>
+        <input name="mobile" [disabled]="nonEditStat" [(ngModel)]="complaint.mobile" type="text" class="form-control"
+          placeholder="Mobile Number">
+      </div>
+      <div class="form-group">
+        <label for="email">Email </label>
+        <input type="email" [disabled]="nonEditStat" class="form-control" #emailControl="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+          [(ngModel)]="complaint.email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">email will be not be shared publicly</small>
+        <div class="alert alert-danger" *ngIf="emailControl.touched  && !emailControl.valid">
+
+          <div *ngIf="emailControl.errors.pattern">
+            Email is invalid
+          </div>
+
+        </div>
+
+      </div>
+      <div class="form-group">
         <label for="compType">Complaint Type</label>
-        
-        <select 
-          [(ngModel)] ="complaint.compType"
-          required
-          name ="compType" 
-          [disabled]  ="nonEditStat"
-          class="form-control"  >
-            <option value="" selected disabled>{{complaint.compType}}</option>
-            <option *ngFor = "let complaintTypes of complaintTypes">{{complaintTypes}}</option> 
+
+        <select [(ngModel)]="complaint.compType" required name="compType" [disabled]="nonEditStat" class="form-control">
+          <option value="" selected disabled>{{complaint.compType}}</option>
+          <option *ngFor="let complaintTypes of complaintTypes">{{complaintTypes}}</option>
         </select>
-    </div>
-    <div class="form-group">
+      </div>
+      <div class="form-group">
         <label for="descr">Description </label>
-        <textarea required 
-                  [disabled] ="nonEditStat"
-                  #descrControl="ngModel"
-                  minlength="10"
-                  name ="descr" 
-                  [(ngModel)] ="complaint.descr"
-                  rows="3" 
-                  class="form-control" 
-                  placeholder="Describe your complaint" >
+        <textarea required [disabled]="nonEditStat" #descrControl="ngModel" minlength="10" name="descr" [(ngModel)]="complaint.descr"
+          rows="3" class="form-control" placeholder="Describe your complaint">
          </textarea>
         <small id="compHelp" class="form-text text-muted">Provide location details</small>
-        <div   class="alert alert-danger" 
-        *ngIf="descrControl.touched  && !descrControl.valid">
-      
-            <div *ngIf="descrControl.errors.required">
-              Description is mandatory
-            </div>
-            <div *ngIf="descrControl.errors.minlength">
-               Description should have a min of 10 characters
-            </div>
-        
-       </div> 
-    
-     </div>
-     </form>
- 
+        <div class="alert alert-danger" *ngIf="descrControl.touched  && !descrControl.valid">
+
+          <div *ngIf="descrControl.errors.required">
+            Description is mandatory
+          </div>
+          <div *ngIf="descrControl.errors.minlength">
+            Description should have a min of 10 characters
+          </div>
+
+        </div>
+
+      </div>
+    </form>
+
   </div>
- 
+
 </body>
+
 </html>

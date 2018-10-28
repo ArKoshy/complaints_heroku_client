@@ -1,132 +1,94 @@
+<div [hidden]="submitted">
 
 
-<div [hidden] = "submitted">
-
-       
-<form 
-      #compForm ="ngForm" 
-      (ngSubmit)="onSubmit(complaint)"
-      >
-  <div class="wrapper">
-        <div class="card text-white mb-3" style="background-color:#24c6d1;">
+    <form #compForm="ngForm" (ngSubmit)="onSubmit(complaint)">
+        <div class="wrapper">
+            <div class="card text-white mb-3" style="background-color:#24c6d1;">
                 <div class="card-header">
-                  Submit Complaint
-         </div>   
-         <div class="card-body" style="background-color: #8a9899;"> 
-       
-      <div class="form-group">
-          <label for="userName">Full Name</label>
-          <input required 
-                 name="userName" 
-                 pattern="[a-zA-Z ]*"
-                 [(ngModel)] ="complaint.userName"
-                 type="text" 
-                 class="form-control"
-                 #userNameControl = "ngModel" 
-                 (change)="log(userNameControl)"   
-                 minlength = "3" 
-                 maxlength="25" 
-                 placeholder="Full Name"  >
-          <div 
-                class="alert alert-danger" 
-                *ngIf="userNameControl.touched  && !userNameControl.valid">
-                <div *ngIf="userNameControl.errors.required">
-                  Name is required
+                    Submit Complaint
                 </div>
-                <div *ngIf="userNameControl.errors.minlength">
-                   Name should have a min of 3 characters
-                </div>
-                <div *ngIf="userNameControl.errors.pattern">
-                   Name should have characters only
-                </div>
-          </div> 
-      </div>
-      <div class="form-group">
-          <label for="mobile">Mobile</label>
-          <input name="mobile" 
-                 [(ngModel)] ="complaint.mobile"
-                 type="text" 
-                 class="form-control"
-                 placeholder="Mobile Number"  >
-      </div>    
-      <div class="form-group">
-          <label for="email">Email </label>
-          <input type="email" 
-                 #emailControl ="ngModel"
-                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-                 class="form-control" 
-                 [(ngModel)] ="complaint.email"
-                 name="email" 
-                 aria-describedby="emailHelp" 
-                 placeholder="Enter email"  
-                 >
-          <small id="emailHelp" class="form-text text-muted">email will be not be shared publicly</small>
-          <div   class="alert alert-danger" 
-          *ngIf="emailControl.touched  && !emailControl.valid">
-        
-           <div *ngIf="emailControl.errors.pattern"> 
-            Email is invalid
-           </div> 
-          
-         </div> 
-      
-        </div>
-      <div class="form-group">
-          <label for="compType">Complaint Type</label>
-          
-          <select 
-            [(ngModel)] ="complaint.compType"
-            required
-            name ="compType" 
-            class="form-control"  >
-              <option value="" selected disabled>Choose here</option>
-              <option *ngFor = "let complaintTypes of complaintTypes">{{complaintTypes}}</option> 
-             
-          </select>
-      </div>
-      <div class="form-group">
-          <label for="descr">Description </label>
-          <textarea required 
-                    #descrControl="ngModel"
-                    name ="descr" 
-                    [(ngModel)] ="complaint.descr"
-                    rows="3" 
-                    class="form-control" 
-                    minlength="10"
-                    placeholder="Describe your complaint" >
+                <div class="card-body" style="background-color: #8a9899;">
+
+                    <div class="form-group">
+                        <label for="userName">Full Name</label>
+                        <input required name="userName" pattern="[a-zA-Z ]*" [(ngModel)]="complaint.userName" type="text"
+                            class="form-control" #userNameControl="ngModel" (change)="log(userNameControl)" minlength="3"
+                            maxlength="25" placeholder="Full Name">
+                        <div class="alert alert-danger" *ngIf="userNameControl.touched  && !userNameControl.valid">
+                            <div *ngIf="userNameControl.errors.required">
+                                Name is required
+                            </div>
+                            <div *ngIf="userNameControl.errors.minlength">
+                                Name should have a min of 3 characters
+                            </div>
+                            <div *ngIf="userNameControl.errors.pattern">
+                                Name should have characters only
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile</label>
+                        <input name="mobile" [(ngModel)]="complaint.mobile" type="text" class="form-control"
+                            placeholder="Mobile Number">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email </label>
+                        <input type="email" #emailControl="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                            class="form-control" [(ngModel)]="complaint.email" name="email" aria-describedby="emailHelp"
+                            placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">email will be not be shared publicly</small>
+                        <div class="alert alert-danger" *ngIf="emailControl.touched  && !emailControl.valid">
+
+                            <div *ngIf="emailControl.errors.pattern">
+                                Email is invalid
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="compType">Complaint Type</label>
+
+                        <select [(ngModel)]="complaint.compType" required name="compType" class="form-control">
+                            <option value="" selected disabled>Choose here</option>
+                            <option *ngFor="let complaintTypes of complaintTypes">{{complaintTypes}}</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="descr">Description </label>
+                        <textarea required #descrControl="ngModel" name="descr" [(ngModel)]="complaint.descr" rows="3"
+                            class="form-control" minlength="10" placeholder="Describe your complaint">
            </textarea>
-          <small id="compHelp" class="form-text text-muted">Provide location details</small>
-          <div   class="alert alert-danger" 
-          *ngIf="descrControl.touched  && !descrControl.valid">
-        
-              <div *ngIf="descrControl.errors.required">
-                Description is mandatory
-              </div>
-              <div *ngIf="descrControl.errors.minlength">
-                 Description should have a min of 10 characters
-              </div>
-          
-         </div> 
-      </div>
+                        <small id="compHelp" class="form-text text-muted">Provide location details</small>
+                        <div class="alert alert-danger" *ngIf="descrControl.touched  && !descrControl.valid">
 
-  <button type="submit" 
-          class="btn btn-primary"
-          [disabled]="!compForm.form.valid">Submit</button>
+                            <div *ngIf="descrControl.errors.required">
+                                Description is mandatory
+                            </div>
+                            <div *ngIf="descrControl.errors.minlength">
+                                Description should have a min of 10 characters
+                            </div>
 
-</div>
-</div>
-</div>
-</form>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" [disabled]="!compForm.form.valid">Submit</button>
+
+                </div>
+            </div>
+        </div>
+    </form>
 
 </div>
 <br>
 
 
-<div [hidden] = "!submitted">
-    <div class ="jumbotron">
+<div [hidden]="!submitted">
+    <div class="jumbotron">
         <b>Complaint registered Successfully!! </b>
         <br>
         <p>Track your complaint with the ID:{{complaint.keyID}}</p>
 
     </div>
-</div> 
+</div>
