@@ -8,8 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild":"ng build --prod"
-   
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -31,6 +30,7 @@
     "path": "^0.12.7",
     "primeicons": "^1.0.0",
     "primeng": "^6.1.5",
+    "popper.js": "^1.14.3",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.3.3",
     "typescript": "~2.9.2",
